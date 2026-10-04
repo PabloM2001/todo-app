@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista de Tareas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="app-header">
+      <h1>Lista de Tareas</h1>
+      <p class="counter" id="counter" aria-live="polite"></p>
+    </header>
+
+    <!-- Mensajes de error / éxito -->
+    <div id="alert" class="alert" role="alert" hidden>
+      <span id="alert-text"></span>
+      <button type="button" class="alert-close" id="alert-close" aria-label="Cerrar">&times;</button>
+    </div>
+
+    <!-- Formulario para crear tareas -->
+    <section class="card">
+      <h2>Nueva tarea</h2>
+      <form id="task-form" novalidate>
+        <div class="field">
+          <label for="title">Título <span class="req">*</span></label>
+          <input id="title" name="title" type="text" maxlength="100" placeholder="Ej. Estudiar para el parcial" autocomplete="off">
+          <small class="field-error" id="title-error"></small>
+        </div>
+        <div class="field">
+          <label for="description">Descripción</label>
+          <textarea id="description" name="description" rows="2" maxlength="500" placeholder="Opcional"></textarea>
+          <small class="field-error" id="description-error"></small>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          <span class="btn-label">Agregar tarea</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Lista de tareas -->
+    <section class="card">
+      <div class="list-header">
+        <h2>Mis tareas</h2>
+        <div class="filters" role="group" aria-label="Filtrar tareas">
+          <button type="button" class="filter active" data-filter="all">Todas</button>
+          <button type="button" class="filter" data-filter="pending">Pendientes</button>
+          <button type="button" class="filter" data-filter="completed">Completadas</button>
+        </div>
+      </div>
+
+      <div id="loading" class="loading" hidden>
+        <span class="spinner" aria-hidden="true"></span> Cargando tareas…
+      </div>
+      <p id="empty" class="empty" hidden></p>
+      <ul id="task-list" class="task-list"></ul>
+    </section>
+  </main>
+
+  <!-- Plantilla de cada tarea -->
+  <template id="task-template">
+    <li class="task">
+      <label class="check">
+        <input type="checkbox" class="task-toggle">
+        <span class="sr-only">Marcar como completada</span>
+      </label>
+      <div class="task-body">
+        <h3 class="task-title"></h3>
+        <p class="task-desc"></p>
+        <time class="task-date"></time>
+      </div>
+      <div class="task-actions">
+        <button type="button" class="btn btn-small task-edit">Editar</button>
+        <button type="button" class="btn btn-small btn-danger task-delete">Eliminar</button>
+      </div>
+    </li>
+  </template>
+
+  <!-- Formulario de edición en línea -->
+  <template id="edit-template">
+    <form class="edit-form" novalidate>
+      <div class="field">
+        <label>Título <span class="req">*</span></label>
+        <input name="title" type="text" maxlength="100" autocomplete="off">
+        <small class="field-error"></small>
+      </div>
+      <div class="field">
+        <label>Descripción</label>
+        <textarea name="description" rows="2" maxlength="500"></textarea>
+      </div>
+      <div class="edit-actions">
+        <button type="submit" class="btn btn-small btn-primary">Guardar</button>
+        <button type="button" class="btn btn-small edit-cancel">Cancelar</button>
+      </div>
+    </form>
+  </template>
+
+  <script src="js/config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

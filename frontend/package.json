@@ -1,0 +1,9 @@
+{
+  "name": "todo-frontend",
+  "version": "1.0.0",
+  "description": "Interfaz web de la Lista de Tareas (HTML, CSS y JavaScript)",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  }
+}
